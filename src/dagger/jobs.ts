@@ -16,6 +16,7 @@ const setupPhp = (ctr: Container, context: Directory): Container =>
     .withDirectory("/app", context, {
       exclude: [".git", "node_modules", "vendor"],
     })
+    .withWorkdir("/app")
     .withExec(["apt-get", "update", "-yqq"])
     .withExec(["apt-get", "install", "gnupg", "-yqq"])
     .withExec([
