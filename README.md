@@ -61,3 +61,30 @@ test:
     - php vendor/bin/phpunit --coverage-text --colors=never
     - npm test
 ```
+
+
+## 🧪 Advanced Usage
+
+This package also provides a ready-to-use pipeline for
+[Dagger](https://dagger.io/), just run the following command on your Laravel project:
+
+```sh
+dagger run deno run -A https://deno.land/x/laravel_pipeline/ci.ts
+```
+
+Or, if you want to use the predefined jobs:
+
+```ts
+import Client, { connect } from "@dagger.io/dagger";
+import { Dagger } from "https://deno.land/x/laravel_pipeline/mod.ts";
+
+const { test } = Dagger;
+
+function pipeline(src = ".") {
+  connect(async (client: Client) => {
+    await test(client, src);
+  });
+}
+
+pipeline();
+```
