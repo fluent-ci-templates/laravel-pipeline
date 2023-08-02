@@ -30,7 +30,7 @@ dagger run fluentci .
 
 ## Environment variables
 
-| Variable               | Description                                | Default Value |
+| Variable               | Description                                | Default |
 | ---------------------- | ------------------------------------------ | ------------- |
 |`MARIADB_USER`          | The username for the MariaDB database      | `user`        |
 |`MARIADB_PASSWORD`      | The password for the MariaDB database      | `password`    |
