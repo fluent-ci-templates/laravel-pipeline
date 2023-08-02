@@ -28,6 +28,14 @@ Now you can run the pipeline with:
 dagger run fluentci .
 ```
 
+## Environment variables
+
+| Variable               | Description                                | Default Value |
+| ---------------------- | ------------------------------------------ | ------------- |
+|`MARIADB_USER`          | The username for the MariaDB database      | `user`        |
+|`MARIADB_PASSWORD`      | The password for the MariaDB database      | `password`    |
+|`MARIADB_ROOT_PASSWORD` | The root password for the MariaDB database | `root`        |
+
 ## Jobs
 
 | Job       | Description   |
