@@ -8,7 +8,7 @@ A ready-to-use Pipeline for your Laravel projects.
 
 ## 🚀 Usage
 
-Run the following command:
+Run the following command in your project:
 
 ```bash
 dagger run fluentci laravel_pipeline
