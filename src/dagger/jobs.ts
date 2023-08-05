@@ -1,6 +1,10 @@
 import Client from "@dagger.io/dagger";
 import { withDevbox } from "https://deno.land/x/nix_installer_pipeline@v0.3.6/src/dagger/steps.ts";
 
+export enum Job {
+  test = "test",
+}
+
 export const test = async (client: Client, src = ".") => {
   const context = client.host().directory(src);
 
@@ -22,7 +26,7 @@ export const test = async (client: Client, src = ".") => {
 
   const baseCtr = withDevbox(
     client
-      .pipeline("test")
+      .pipeline(Job.test)
       .container()
       .from("alpine:latest")
       .withExec(["apk", "update"])
@@ -49,18 +53,23 @@ export const test = async (client: Client, src = ".") => {
       "devbox run -- composer install --no-interaction && \
        devbox run -- npm install",
     ])
-    .withExec([
-      "sh",
-      "-c",
-      "eval $(devbox shell --print-env) && \
-       php artisan key:generate && \
-       php artisan config:cache && \
-       php artisan migrate && \
-       php artisan db:seed && \
-       php vendor/bin/phpunit",
-    ]);
+    .withExec(["sh", "-c", "devbox run -- php artisan key:generate"])
+    .withExec(["sh", "-c", "devbox run -- php artisan config:cache"])
+    .withExec(["sh", "-c", "devbox run -- php artisan migrate"])
+    .withExec(["sh", "-c", "devbox run -- php artisan db:seed"])
+    .withExec(["sh", "-c", "devbox run -- php vendor/bin/phpunit"]);
 
   const result = await ctr.stdout();
 
   console.log(result);
+};
+
+export type JobExec = (client: Client, src?: string) => Promise<void>;
+
+export const runnableJobs: Record<Job, JobExec> = {
+  [Job.test]: test,
+};
+
+export const jobDescriptions: Record<Job, string> = {
+  [Job.test]: "Run all tests",
 };
