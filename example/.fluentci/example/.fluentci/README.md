@@ -8,7 +8,7 @@ A ready-to-use Pipeline for your Laravel projects.
 
 ## 🚀 Usage
 
-Run the following command:
+Run the following command in your project:
 
 ```bash
 dagger run fluentci laravel_pipeline
@@ -27,6 +27,14 @@ Now you can run the pipeline with:
 ```bash
 dagger run fluentci .
 ```
+
+## Environment variables
+
+| Variable               | Description                                | Default |
+| ---------------------- | ------------------------------------------ | ------------- |
+|`MARIADB_USER`          | The username for the MariaDB database      | `user`        |
+|`MARIADB_PASSWORD`      | The password for the MariaDB database      | `password`    |
+|`MARIADB_ROOT_PASSWORD` | The root password for the MariaDB database | `root`        |
 
 ## Jobs
 

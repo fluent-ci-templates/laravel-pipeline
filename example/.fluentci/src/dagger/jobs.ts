@@ -1,9 +1,17 @@
-import Client from "@dagger.io/dagger";
-import { withDevbox } from "https://deno.land/x/nix_installer_pipeline@v0.3.6/src/dagger/steps.ts";
+import Client from "@fluentci.io/dagger";
+import { withDevbox } from "https://deno.land/x/nix_installer_pipeline@v0.4.1/src/dagger/steps.ts";
 
 export enum Job {
   test = "test",
 }
+
+export const exclude = [
+  "vendor",
+  "node_modules",
+  ".git",
+  ".fluentci",
+  ".devbox",
+];
 
 export const test = async (client: Client, src = ".") => {
   const context = client.host().directory(src);
@@ -41,9 +49,7 @@ export const test = async (client: Client, src = ".") => {
       "/app/node_modules",
       client.cacheVolume("laravel-node_modules")
     )
-    .withDirectory("/app", context, {
-      exclude: ["vendor", "node_modules", ".git", ".fluentci", ".devbox"],
-    })
+    .withDirectory("/app", context, { exclude })
     .withWorkdir("/app")
     .withServiceBinding("db", mariadb)
     .withExec(["cp", ".env.example", ".env"])
