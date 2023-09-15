@@ -5,6 +5,14 @@ export enum Job {
   test = "test",
 }
 
+export const exclude = [
+  "vendor",
+  "node_modules",
+  ".git",
+  ".fluentci",
+  ".devbox",
+];
+
 export const test = async (client: Client, src = ".") => {
   const context = client.host().directory(src);
 
@@ -41,9 +49,7 @@ export const test = async (client: Client, src = ".") => {
       "/app/node_modules",
       client.cacheVolume("laravel-node_modules")
     )
-    .withDirectory("/app", context, {
-      exclude: ["vendor", "node_modules", ".git", ".fluentci", ".devbox"],
-    })
+    .withDirectory("/app", context, { exclude })
     .withWorkdir("/app")
     .withServiceBinding("db", mariadb)
     .withExec(["cp", ".env.example", ".env"])
