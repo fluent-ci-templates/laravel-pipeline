@@ -15,7 +15,7 @@ export function generateYaml(): BuildSpec {
       ],
     })
     .phase("build", {
-      commands: ["dagger run fluentci laravel_pipeline"],
+      commands: ["fluentci run laravel_pipeline"],
     })
     .phase("post_build", {
       commands: ["echo Build completed on `date`"],

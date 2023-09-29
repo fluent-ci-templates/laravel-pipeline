@@ -34,7 +34,7 @@ export function generateYaml(): AzurePipeline {
       displayName: "Setup Dagger",
     })
     .step({
-      script: "dagger run fluentci laravel_pipeline",
+      script: "fluentci run laravel_pipeline",
       displayName: "Run Dagger Pipelines",
     });
   return azurePipeline;

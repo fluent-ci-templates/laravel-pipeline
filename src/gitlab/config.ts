@@ -25,7 +25,7 @@ export function generateYaml(): GitlabCI {
 
   const tests = new Job()
     .extends(".dagger")
-    .script("dagger run fluentci laravel_pipeline");
+    .script("fluentci run laravel_pipeline");
 
   return new GitlabCI()
     .addJob(".docker", docker)

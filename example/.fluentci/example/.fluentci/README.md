@@ -1,7 +1,7 @@
 # Laravel Pipeline
 
 [![deno module](https://shield.deno.dev/x/laravel_pipeline)](https://deno.land/x/laravel_pipeline)
-![deno compatibility](https://shield.deno.dev/deno/^1.34)
+![deno compatibility](https://shield.deno.dev/deno/^1.37)
 [![](https://img.shields.io/codecov/c/gh/fluent-ci-templates/laravel-pipeline)](https://codecov.io/gh/fluent-ci-templates/laravel-pipeline)
 
 A ready-to-use Pipeline for your Laravel projects.
