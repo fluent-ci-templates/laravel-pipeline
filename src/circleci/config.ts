@@ -26,7 +26,7 @@ dagger version`,
     {
       run: {
         name: "Run Dagger Pipelines",
-        command: "dagger run fluentci laravel_pipeline",
+        command: "fluentci run laravel_pipeline",
       },
     },
   ]);

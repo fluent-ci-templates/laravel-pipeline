@@ -2,7 +2,7 @@
 
 [![fluentci pipeline](https://img.shields.io/badge/dynamic/json?label=pkg.fluentci.io&labelColor=%23000&color=%23460cf1&url=https%3A%2F%2Fapi.fluentci.io%2Fv1%2Fpipeline%2Flaravel_pipeline&query=%24.version)](https://pkg.fluentci.io/laravel_pipeline)
 [![deno module](https://shield.deno.dev/x/laravel_pipeline)](https://deno.land/x/laravel_pipeline)
-![deno compatibility](https://shield.deno.dev/deno/^1.34)
+![deno compatibility](https://shield.deno.dev/deno/^1.37)
 [![](https://img.shields.io/codecov/c/gh/fluent-ci-templates/laravel-pipeline)](https://codecov.io/gh/fluent-ci-templates/laravel-pipeline)
 
 The following command will generate a `.github/workflows/tests.yml` file in your project:
@@ -34,7 +34,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: denoland/setup-deno@v1
         with:
-          deno-version: v1.36
+          deno-version: v1.37
       - name: Setup Fluent CI CLI
         run: deno install -A -r https://cli.fluentci.io -n fluentci
       - name: Setup Dagger
@@ -43,7 +43,7 @@ jobs:
             sudo mv bin/dagger /usr/local/bin
             dagger version
       - name: Run Dagger Pipelines
-        run: dagger run fluentci laravel_pipeline
+        run: fluentci run laravel_pipeline
 
 ```
 
