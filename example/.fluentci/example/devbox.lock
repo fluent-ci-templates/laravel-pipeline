@@ -1,0 +1,38 @@
+{
+  "lockfile_version": "1",
+  "packages": {
+    "mariadb@latest": {
+      "last_modified": "2023-07-25T23:32:12Z",
+      "plugin_version": "0.0.2",
+      "resolved": "github:NixOS/nixpkgs/a9b47d85504bdd199e90846622c76aa0bfeabfac#mariadb_110",
+      "source": "devbox-search",
+      "version": "11.0.2"
+    },
+    "nodejs@18": {
+      "last_modified": "2023-07-25T23:32:12Z",
+      "resolved": "github:NixOS/nixpkgs/a9b47d85504bdd199e90846622c76aa0bfeabfac#nodejs_18",
+      "source": "devbox-search",
+      "version": "18.16.1"
+    },
+    "php81Packages.composer@latest": {
+      "last_modified": "2023-07-25T23:32:12Z",
+      "resolved": "github:NixOS/nixpkgs/a9b47d85504bdd199e90846622c76aa0bfeabfac#php81Packages.composer",
+      "source": "devbox-search",
+      "version": "2.5.8"
+    },
+    "php@8.1": {
+      "last_modified": "2023-07-25T23:32:12Z",
+      "plugin_version": "0.0.2",
+      "resolved": "github:NixOS/nixpkgs/a9b47d85504bdd199e90846622c76aa0bfeabfac#php81",
+      "source": "devbox-search",
+      "version": "8.1.21"
+    },
+    "redis@latest": {
+      "last_modified": "2023-07-25T23:32:12Z",
+      "plugin_version": "0.0.2",
+      "resolved": "github:NixOS/nixpkgs/a9b47d85504bdd199e90846622c76aa0bfeabfac#redis",
+      "source": "devbox-search",
+      "version": "7.0.12"
+    }
+  }
+}
