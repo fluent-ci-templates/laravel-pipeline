@@ -1,4 +1,4 @@
-import Client, { connect, withDevbox } from "../../deps.ts";
+import Client, { connect } from "../../deps.ts";
 
 export enum Job {
   test = "test",
@@ -32,16 +32,13 @@ export const test = async (src = "."): Promise<string> => {
       )
       .withExposedPort(3306);
 
-    const baseCtr = withDevbox(
-      client
-        .pipeline(Job.test)
-        .container()
-        .from("alpine:latest")
-        .withExec(["apk", "update"])
-        .withExec(["apk", "add", "bash", "curl"])
-        .withMountedCache("/nix", client.cacheVolume("nix"))
-        .withMountedCache("/etc/nix", client.cacheVolume("nix-etc"))
-    );
+    const baseCtr = client
+      .pipeline(Job.test)
+      .container()
+      .from("ghcr.io/fluentci-io/devbox:latest")
+      .withExec(["mv", "/nix/store", "/nix/store-orig"])
+      .withMountedCache("/nix/store", client.cacheVolume("nix-cache"))
+      .withExec(["sh", "-c", "cp -r /nix/store-orig/* /nix/store/"]);
 
     const ctr = baseCtr
       .withMountedCache("/app/vendor", client.cacheVolume("composer-vendor"))
