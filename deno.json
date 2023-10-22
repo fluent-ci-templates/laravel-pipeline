@@ -10,19 +10,22 @@
   "fmt": {
     "exclude": [
       "example/",
-      ".fluentci/"
+      ".fluentci/",
+      "gen/"
     ]
   },
   "lint": {
     "exclude": [
       "example/",
-      ".fluentci/"
+      ".fluentci/",
+      "gen/"
     ]
   },
   "test": {
     "exclude": [
       "example/",
-      ".fluentci/"
+      ".fluentci/",
+      "gen/"
     ]
   }
 }
