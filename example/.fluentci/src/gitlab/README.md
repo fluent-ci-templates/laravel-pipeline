@@ -40,7 +40,7 @@ Generated file:
 tests:
   extends: .dagger
   script:
-    - dagger run fluentci laravel_pipeline
+    - fluentci run laravel_pipeline
 
 
 ```

@@ -43,7 +43,7 @@ jobs:
             sudo mv bin/dagger /usr/local/bin
             dagger version
       - name: Run Dagger Pipelines
-        run: dagger run fluentci laravel_pipeline
+        run: fluentci run laravel_pipeline
 
 ```
 

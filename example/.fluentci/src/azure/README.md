@@ -34,7 +34,7 @@ steps:
         sudo mv bin/dagger /usr/local/bin
         dagger version
     displayName: Setup Dagger
-  - script: dagger run fluentci laravel_pipeline
+  - script: fluentci run laravel_pipeline
     displayName: Run Dagger Pipelines
 
 ```
