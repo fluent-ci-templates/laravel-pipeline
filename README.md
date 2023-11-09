@@ -52,7 +52,7 @@ test(src: String!): String
 You can also use this pipeline programmatically:
 
 ```ts
-import { test } from "https://pkg.fluentci.io/laravel_pipeline@v0.6.1/mod.ts";
+import { test } from "https://pkg.fluentci.io/laravel_pipeline@v0.7.0/mod.ts";
 
 await test(".");
 
