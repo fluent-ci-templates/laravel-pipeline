@@ -1,4 +1,6 @@
-import Client, { connect } from "../../deps.ts";
+import { Client, Directory } from "../../sdk/client.gen.ts";
+import { connect } from "../../sdk/connect.ts";
+import { getDirectory } from "./lib.ts";
 
 export enum Job {
   test = "test",
@@ -12,9 +14,16 @@ export const exclude = [
   ".devbox",
 ];
 
-export const test = async (src = "."): Promise<string> => {
+/**
+ * @function
+ * @description Run all tests
+ * @param {string | Directory} src
+ * @returns {string}
+ */
+export async function test(src: Directory | string = "."): Promise<string> {
+  let result = "";
   await connect(async (client: Client) => {
-    const context = client.host().directory(src);
+    const context = getDirectory(client, src);
 
     // get MariaDB base image
     const mariadb = client
@@ -30,7 +39,8 @@ export const test = async (src = "."): Promise<string> => {
         "MARIADB_ROOT_PASSWORD",
         Deno.env.get("MARIADB_ROOT_PASSWORD") || "root"
       )
-      .withExposedPort(3306);
+      .withExposedPort(3306)
+      .asService();
 
     const baseCtr = client
       .pipeline(Job.test)
@@ -62,14 +72,12 @@ export const test = async (src = "."): Promise<string> => {
       .withExec(["sh", "-c", "devbox run -- php artisan db:seed"])
       .withExec(["sh", "-c", "devbox run -- php vendor/bin/phpunit"]);
 
-    const result = await ctr.stdout();
-
-    console.log(result);
+    result = await ctr.stdout();
   });
-  return "done";
-};
+  return result;
+}
 
-export type JobExec = (src?: string) => Promise<string>;
+export type JobExec = (src?: Directory | string) => Promise<string>;
 
 export const runnableJobs: Record<Job, JobExec> = {
   [Job.test]: test,

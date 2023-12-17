@@ -37,6 +37,14 @@ dagger run fluentci .
 |`MARIADB_PASSWORD`      | The password for the MariaDB database      | `password`    |
 |`MARIADB_ROOT_PASSWORD` | The root password for the MariaDB database | `root`        |
 
+## Dagger Module
+
+Use as a [Dagger](https://dagger.io) module:
+
+```bash
+dagger mod install github.com/fluent-ci-templates/laravel-pipeline@mod
+```
+
 ## Jobs
 
 | Job       | Description   |
@@ -44,7 +52,7 @@ dagger run fluentci .
 | test      | Run tests     |
 
 ```graphql
-test(src: String!): String
+test(src?: Directory | string): Promise<string>
 ```
 
 ## Programmatic usage
@@ -52,7 +60,7 @@ test(src: String!): String
 You can also use this pipeline programmatically:
 
 ```ts
-import { test } from "https://pkg.fluentci.io/laravel_pipeline@v0.7.0/mod.ts";
+import { test } from "https://pkg.fluentci.io/laravel_pipeline@v0.8.0/mod.ts";
 
 await test(".");
 

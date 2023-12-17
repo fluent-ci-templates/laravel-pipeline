@@ -1,5 +1,4 @@
 {
-  "root": "",
-  "name": "laravel",
-  "sdkRuntime": "tsiry/dagger-sdk-deno"
+  "name": "larevel",
+  "sdk": "github.com/fluentci-io/daggerverse/deno-sdk@main"
 }
