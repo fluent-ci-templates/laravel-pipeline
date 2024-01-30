@@ -42,10 +42,21 @@ export async function test(src: Directory | string = "."): Promise<string> {
   const baseCtr = dag
     .pipeline(Job.test)
     .container()
-    .from("ghcr.io/fluentci-io/devbox:latest")
-    .withExec(["mv", "/nix/store", "/nix/store-orig"])
-    .withMountedCache("/nix/store", dag.cacheVolume("nix-cache"))
-    .withExec(["sh", "-c", "cp -r /nix/store-orig/* /nix/store/"]);
+    .from("pkgxdev/pkgx:latest")
+    .withMountedCache("/root/.pkgx", dag.cacheVolume("symfony-pkgx"))
+    .withEnvVariable("COMPOSER_ALLOW_SUPERUSER", "1")
+    .withExec([
+      "pkgx",
+      "install",
+      "node@18.16.1",
+      "classic.yarnpkg.com",
+      "bun",
+      "composer",
+      "php",
+      "git",
+      "zip",
+      "unzip",
+    ]);
 
   const ctr = baseCtr
     .withMountedCache("/app/vendor", dag.cacheVolume("composer-vendor"))
@@ -57,17 +68,13 @@ export async function test(src: Directory | string = "."): Promise<string> {
     .withWorkdir("/app")
     .withServiceBinding("db", mariadb)
     .withExec(["cp", ".env.example", ".env"])
-    .withExec([
-      "sh",
-      "-c",
-      "devbox run -- composer install --no-interaction && \
-         devbox run -- npm install",
-    ])
-    .withExec(["sh", "-c", "devbox run -- php artisan key:generate"])
-    .withExec(["sh", "-c", "devbox run -- php artisan config:cache"])
-    .withExec(["sh", "-c", "devbox run -- php artisan migrate"])
-    .withExec(["sh", "-c", "devbox run -- php artisan db:seed"])
-    .withExec(["sh", "-c", "devbox run -- php vendor/bin/phpunit"]);
+    .withExec(["composer", "install", "--no-interaction"])
+    .withExec(["npm", "install"])
+    .withExec(["php", "artisan", "key:generate"])
+    .withExec(["php", "artisan", "config:cache"])
+    .withExec(["php", "artisan", "migrate"])
+    .withExec(["php", "artisan", "db:seed"])
+    .withExec(["php", "vendor/bin/phpunit"]);
 
   const result = await ctr.stdout();
   return result;

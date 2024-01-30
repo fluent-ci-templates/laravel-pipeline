@@ -60,7 +60,7 @@ test(src?: Directory | string): Promise<string>
 You can also use this pipeline programmatically:
 
 ```ts
-import { test } from "https://pkg.fluentci.io/laravel_pipeline@v0.8.1/mod.ts";
+import { test } from "https://pkg.fluentci.io/laravel_pipeline@v0.8.2/mod.ts";
 
 await test(".");
 
