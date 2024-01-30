@@ -49,6 +49,7 @@ export async function test(src: Directory | string = "."): Promise<string> {
             "pkgx",
             "install",
             "node@18.16.1",
+            "npm",
             "classic.yarnpkg.com",
             "bun",
             "composer",
