@@ -1,7 +1,7 @@
 {
   "packages": [
     "mariadb@latest",
-    "php@8.1",
+    "php@8.2",
     "nodejs@18",
     "redis@latest",
     "php81Packages.composer@latest"
