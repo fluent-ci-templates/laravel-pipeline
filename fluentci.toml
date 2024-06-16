@@ -1,0 +1,8 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "CI/CD Plugin for Laravel"
+license = "MIT"
+name = "laravel"
+version = "0.9.0"
