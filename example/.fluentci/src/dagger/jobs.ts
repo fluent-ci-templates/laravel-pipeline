@@ -1,3 +1,4 @@
+import { env } from "../../deps.ts";
 import { Directory, dag } from "../../sdk/client.gen.ts";
 import { getDirectory } from "./lib.ts";
 
@@ -26,10 +27,10 @@ export async function test(src: Directory | string = "."): Promise<string> {
   const mariadb = dag
     .container()
     .from("mariadb:10.11.2")
-    .withEnvVariable("MARIADB_USER", Deno.env.get("MARIADB_USER") || "user")
+    .withEnvVariable("MARIADB_USER", env.get("MARIADB_USER") || "user")
     .withEnvVariable(
       "MARIADB_PASSWORD",
-      Deno.env.get("MARIADB_PASSWORD") || "password"
+      env.get("MARIADB_PASSWORD") || "password"
     )
     .withEnvVariable("MARIADB_DATABASE", "laravel")
     .withEnvVariable(
