@@ -12,24 +12,23 @@ jobs:
       - uses: actions/checkout@v3
       - name: Shutdown Ubuntu MySQL (SUDO)
         run: sudo service mysql stop
-      - uses: getong/mariadb-action@v1.1
-        with:
-          mysql database: "laravel"
-          mysql user: "user"
-          mysql password: "password"
       - name: Setup Fluent CI CLI
         uses: fluentci-io/setup-fluentci@v5
         with:
           wasm: true
-          pipeline: .
+          plugin: mariadb
           args: |
-            test
+            start
           working-directory: example
+      - name: create laravel database
+        run: flox activate -- mysql -u root --socket=../../mysql/mysql.socket -e "CREATE DATABASE laravel;"
+        working-directory: example/.fluentci/mariadb
+      - name: run tests
+        run: fluentci run --wasm . test
+        working-directory: example
         env:
           MARIADB_DATABASE: laravel
           MARIADB_USER: root
-          MARIADB_PASSWORD: root
-          MARIADB_ROOT_PASSWORD: root
       - name: Run Dagger Pipelines
         run: dagger run deno run -A ../src/dagger/runner.ts
         working-directory: example
