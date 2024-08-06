@@ -11,7 +11,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Shutdown Ubuntu MySQL (SUDO)
-        run: sudo service mysql stop
+        run: |
+          sudo service mysql stop
+          sudo apt-get remove --purge mysql-server mysql-client mysql-common -y
+          sudo apt-get autoremove -y
+          sudo apt-get autoclean
+          sudo rm -rf /etc/mysql
+          sudo rm -rf /var/lib/mysql
       - name: Setup Fluent CI CLI
         uses: fluentci-io/setup-fluentci@v5
         with:
