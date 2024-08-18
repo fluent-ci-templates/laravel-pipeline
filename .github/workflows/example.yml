@@ -26,13 +26,10 @@ jobs:
           args: |
             start
           working-directory: example
-      - name: create laravel database
-        run: |
-          flox activate -- mysql -u root --socket=../../mysql/mysql.socket -e "CREATE DATABASE laravel;"
-          flox activate -- mysql -u root --socket=../../mysql/mysql.socket -e "CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';"
-          flox activate -- mysql -u root --socket=../../mysql/mysql.socket -e "GRANT ALL PRIVILEGES ON laravel.* TO 'user'@'localhost';"
-          flox activate -- mysql -u root --socket=../../mysql/mysql.socket -e "FLUSH PRIVILEGES;"
-        working-directory: example/.fluentci/mariadb
+        env:
+          MARIADB_USER: user
+          MARIADB_PASSWORD: password
+          MARIADB_DATABASE: laravel
       - name: run tests
         run: fluentci run --wasm . test
         working-directory: example
